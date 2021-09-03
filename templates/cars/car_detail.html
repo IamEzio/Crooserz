@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}| {{single_car.car_title}}{% endblock %}
+
 {% block content %}
+{% load static %}
 {% load humanize %}
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
@@ -24,6 +27,7 @@
                 <div class="car-details-section">
                     <!-- Heading start -->
                     <div class="heading-car clearfix">
+                      {% include 'includes/messages.html' %}
                         <div class="pull-left">
                             <h3>{{single_car.car_title}}</h3>
                             <h6>
@@ -207,21 +211,33 @@
                         <div class="modal-content">
                           <div class="contact-dealer modal-header">
                             <!-- <h5 class="modal-title" id="inquiryModalLabel">Contact Dealer</h5> -->
-                            <img src="img/logos/logo-black-white.png">
+                            <center><img src="{% static 'img/logos/logo-black-white.png' %}"></center>
                             <button type="button" class="close" data-dismiss="modal">
                               <span>&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
-                            <form action="#">
+                            <form action="{% url 'inquiry' %}" method="POST">
+                              {% csrf_token %}
+
+                              {% if user.is_authenticated %}
+                                <input type="hidden" name="user_id" value="{{user.id}}">
+                              {% else %}
+                                <input type="hidden" name="user_id" value="0">
+                              {% endif %}
+
+                              <input type="hidden" name="car_id" value="{{single_car.id}}">
+
                                 <div class="form-group">
                                   <label for="name" class="col-form-label">Hello, My Name is</label>
                                   <div class="row">
                                     <div class="col">
-                                      <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
+                                      <input type="text" name="first_name" class="form-control" placeholder="First Name"
+                                      {% if user.is_authenticated %} value="{{user.first_name}}" {% endif %} required>
                                     </div>
                                     <div class="col">
-                                      <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+                                      <input type="text" name="last_name" class="form-control" placeholder="Last Name"
+                                      {% if user.is_authenticated %} value="{{user.last_name}}" {% endif %} required>
                                     </div>
                                   </div>
                                 </div>
@@ -235,7 +251,7 @@
                                     </div>
 
                                 <div class="form-group">
-                                  <input type="text" name="car_title" class="form-control" value="LAMBORGHINI HURACÁN." readonly>
+                                  <input type="text" name="car_title" class="form-control" value="{{ single_car.car_title }}" readonly>
                                 </div>
 
                                 <div class="form-group">
@@ -254,7 +270,8 @@
                                   <div class="row">
                                     <div class="col">
                                         <label for="name" class="col-form-label">You can reach me by email at</label>
-                                      <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                                      <input type="email" name="email" class="form-control" placeholder="Email Address"
+                                      {% if user.is_authenticated %} value="{{user.email}}" {% endif %} required>
                                     </div>
                                     <div class="col">
                                         <label for="phone" class="col-form-label">or by phone at</label>
@@ -279,13 +296,13 @@
                         <h5 class="sidebar-title">Get a Question?</h5>
                         <ul class="contact-info">
                             <li>
-                                <i class="flaticon-pin"></i>20/F Green Road, Dhanmondi
+                                <i class="flaticon-pin"></i>IIT BHU Varanasi
                             </li>
                             <li>
-                                <i class="flaticon-mail"></i><a href="mailto:info@themevessel.com">info@themevessel.com</a>
+                                <i class="flaticon-mail"></i><a href="mailto:info@themevessel.com">info@Crooserz.com</a>
                             </li>
                             <li>
-                                <i class="flaticon-phone"></i><a href="tel:+0477-85x6-552">+0477 85x6 552</a>
+                                <i class="flaticon-phone"></i><a href="tel:+0477-85x6-552">+91 8318XXXXXX</a>
                             </li>
                         </ul>
                         <div class="social-list clearfix">
@@ -307,16 +324,16 @@
 <!-- Properties details page end -->
 
 <!-- Full Page Search -->
-<div id="full-page-search">
+<!-- <div id="full-page-search">
     <button type="button" class="close">×</button>
-    <form action="https://storage.googleapis.com/theme-vessel/carhouse/index.html#" class="search-header">
-        <input type="search" value="" placeholder="type keyword(s) here" />
+    <form action="{% url 'search'%}" class="search-header">
+        <input type="search" value="" placeholder="type keyword(s) here" name="keyword" />
         <button type="submit" class="btn btn-sm button-theme">Search</button>
     </form>
-</div>
+</div> -->
 
 <!-- Car Overview Modal -->
-<div class="car-model-2">
+<!-- <div class="car-model-2">
     <div class="modal fade" id="carOverviewModal" tabindex="-1" role="dialog" aria-labelledby="carOverviewModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -388,7 +405,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 {% endblock %}

@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+
+{% block title %}| Search Results{% endblock %}
+
 {% block content %}
 {% load humanize %}
 <!-- Banner start -->
@@ -56,7 +59,7 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="select-type">
+                                <select class="selectpicker search-fields" name="body_style">
                                     <option disabled="disabled" selected="selected">Select Body Style</option>
                                     {% for body_style in body_style_search %}
                                       <option value="{{body_style}}">{{body_style}}</option>
@@ -106,6 +109,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
         <div class="row">
+          {% if cars %}
           {% for car in cars %}
             <div class="col-lg-4 col-md-6">
                 <div class="car-box">
@@ -180,7 +184,12 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
+          {% endfor %}
+          {% else %}
+            <div class="col-lg-6 col-md-6 offset-lg-3">
+              <h3>Sorry! No such cars in inventory.</h3>
+            </div>
+          {% endif %}
         </div>
     </div>
 </div>

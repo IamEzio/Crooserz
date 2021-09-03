@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+
+{% block title %}| Contact{% endblock %}
+
 {% block content %}
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
@@ -22,7 +25,9 @@
             <h1>Contact <span>Us</span></h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
         </div>
-        <form action="#" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'contact' %}" method="POST" enctype="multipart/form-data">
+          {% include 'includes/messages.html' %}
+          {% csrf_token %}
             <div class="row">
                 <div class="col-lg-7">
                     <div class="row">
@@ -66,7 +71,7 @@
                             </div>
                             <div class="detail">
                                 <h5>Phone:</h5>
-                                <p><a href="#">0477 8556 552</a></p>
+                                <p><a href="#">+91 8318XXXXXX</a></p>
                             </div>
                         </div>
                         <div class="ci-box">
@@ -75,7 +80,7 @@
                             </div>
                             <div class="detail">
                                 <h5>Email:</h5>
-                                <p><a href="#">info@themevessel.com</a></p>
+                                <p><a href="#">info@Crooserz.com</a></p>
                             </div>
                         </div>
                         <div class="ci-box">
@@ -84,7 +89,7 @@
                             </div>
                             <div class="detail">
                                 <h5>Web:</h5>
-                                <p><a href="#">info@themevessel.com</a></p>
+                                <p><a href="#">info@Crooserz.com</a></p>
                             </div>
                         </div>
                         <div class="ci-box mb-0">
@@ -93,7 +98,7 @@
                             </div>
                             <div class="detail">
                                 <h5>Fax:</h5>
-                                <p><a href="#">+0477 85X6 552</a></p>
+                                <p><a href="#">+0477 85XX XXX</a></p>
                             </div>
                         </div>
                     </div>

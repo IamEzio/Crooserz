@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}| Home{% endblock %}
+
 {% block content %}
 {% load static %}
 {% load humanize %}
@@ -269,7 +271,7 @@
                             <p class="cartype">{{car.body_style}}</p>
                         </div>
                         <div class="pull-right">
-                            <p class="price">${{car.Price | intcomma}}</p>
+                            <p class="price">${{car.price | intcomma}}</p>
                         </div>
                     </div>
                 </div>

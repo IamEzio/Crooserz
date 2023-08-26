@@ -93,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'crooserz_db',
         'USER': 'postgres',
-        'PASSWORD': 'isuperman',
+        'PASSWORD': 'your-password',
         'HOST': 'localhost',
     }
 }

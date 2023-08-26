@@ -156,6 +156,6 @@ SITE_ID = 1
 # Email sending
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'iamezio1234@gmail.com'
-EMAIL_HOST_PASSWORD = 'isuperman'
+EMAIL_HOST_USER = 'your-email'
+EMAIL_HOST_PASSWORD = 'your-pass'
 EMAIL_USE_TLS = True
